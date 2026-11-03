@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos annonces - Séjours d'exception{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    {# En-tête de section #}
+    <div class="d-flex justify-content-between align-items-end mb-4 pb-2 border-bottom">
+        <div>
+            <h1 class="fw-bold mb-1">Nos hébergements</h1>
+            <p class="text-muted mb-0">Découvrez tous nos logements disponibles pour votre prochain séjour.</p>
+        </div>
+        <span class="badge bg-light text-dark border px-3 py-2 rounded-pill fs-6">
+           {{ ads | length }} {{ ads | length > 1 ? 'annonces' : "annonce" }}
+        </span>
+    </div>
+
+    {# Grille des annonces #}
+    <div class="row g-4">
+      {% for ad in ads %}
+        {% set url = path('ads_show' , {'slug': ad.slug}) %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden ad-card">
+                {# Vignette de l'annonce avec badge prix superposé #}
+                <div class="position-relative overflow-hidden">
+                    <a href="{{ url }}" class="text-decoration-none">
+                        <img src="{{ ad.coverImage }}" 
+                            alt="Photo de {{ ad.title }}" 
+                            class="card-img-top ad-img"
+                            loading="lazy"
+                            style="height: 220px; object-fit: cover;">
+                    </a>
+                    {# Badge Prix #}
+                    <div class="position-absolute bottom-0 start-0 m-3 px-3 py-1 bg-dark bg-opacity-75 text-white rounded-pill backdrop-blur">
+                        <span class="fw-bold fs-5">{{ ad.price }} €</span> <small class="text-white-50">/ nuit</small>
+                    </div>
+                    {# Badge Chambres #}
+                    <div class="text-black position-absolute top-0 end-0 m-3 px-2 py-1 bg-white shadow-sm rounded-pill small fw-medium text-secondary">
+                        {{ ad.rooms }} {{ ad.rooms > 1 ? 'chambres' : 'chambre' }}
+                    </div>
+                </div>
+                {# Corps de la carte #}
+                <div class="card-body d-flex flex-column p-4">
+                    <h5 class="card-title fw-bold text-truncate mb-2" title="{{ ad.title }}">
+                        <a href="{{ url }}" class="text-dark text-decoration-none stretched-link-hover">
+                            {{ ad.title }}
+                        </a>
+                    </h5>
+                    <p class="card-text text-muted small flex-grow-1 mb-4" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        {{ ad.introduction }}
+                    </p>
+                </div>
+            </div>
+        </div>
+      {% else %}
+            <div class="col-12 text-center py-5">
+                <div class="p-5 bg-light rounded-4 border">
+                    <i class="bi bi-house-x fs-1 text-muted d-block mb-3"></i>
+                    <h3 class="fw-semibold">Aucune annonce disponible</h3>
+                    <p class="text-muted">Revenez plus tard pour découvrir de nouveaux logements.</p>
+                </div>
+            </div>
+      {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -8,6 +8,7 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import 'bootstrap/dist/js/bootstrap.bundle'
 import './styles/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import './styles/app.css';
 
 console.log("webPack Encore")

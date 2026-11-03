@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ad.title }} · Séjour{% endblock %}
+
+{% block body %}
+{# 1. Bannière Hero avec image de fond & overlay #}
+<div class="position-relative text-white py-5 mb-5 overflow-hidden" 
+     style="background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.7)), url('{{ ad.coverImage }}') center/cover no-repeat; min-height: 420px;">
+    
+    <div class="container h-100 d-flex flex-column justify-content-center py-4">
+        
+        {# Badges d'informations rapides #}
+        <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge bg-light bg-opacity-25 backdrop-blur px-3 py-2 rounded-pill fs-6 text-white border border-light border-opacity-25">
+                {{ ad.rooms }} {{ ad.rooms > 1 ? 'chambres' : 'chambre' }}
+            </span>
+            <span class="badge bg-primary px-3 py-2 rounded-pill fs-6 fw-bold shadow-sm">
+                {{ ad.price }} € <span class="fw-normal small">/ nuit</span>
+            </span>
+        </div>
+
+        {# Titre & intro #}
+        <h1 class="display-5 fw-bold mb-3 text-shadow">{{ ad.title }}</h1>
+        <p class="lead mb-4 col-lg-8 text-light text-opacity-90">{{ ad.introduction }}</p>
+
+       
+    </div>
+</div>
+
+{# 2. Contenu principal #}
+<div class="container mb-5">
+    <div class="row g-5">
+        
+        {# Colonne gauche : Description & Carrousel #}
+        <div class="col-lg-8">
+            
+            {# Galerie photos / Carrousel #}
+            {% if ad.images|length > 0 %}
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-5">
+                    <div id="adCarousel" class="carousel slide" data-bs-ride="carousel">
+                        
+                        {# Indicateurs #}
+                        <div class="carousel-indicators">
+                            {% for image in ad.images %}
+                                <button type="button" 
+                                        data-bs-target="#adCarousel" 
+                                        data-bs-slide-to="{{ loop.index0 }}" 
+                                        {% if loop.first %}class="active" aria-current="true"{% endif %} 
+                                        aria-label="Photo {{ loop.index }}">
+                                </button>
+                            {% endfor %}
+                        </div>
+
+                        {# Slides #}
+                        <div class="carousel-inner">
+                            {% for image in ad.images %}
+                                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                    <img src="{{ image.url }}" 
+                                         class="d-block w-100" 
+                                         alt="Photo de {{ ad.title }}"
+                                         style="height: 480px; object-fit: cover;">
+                                    {% if image.caption %}
+                                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 backdrop-blur rounded-3 p-2 px-3 mx-auto" style="max-width: 80%;">
+                                            <p class="mb-0 small">{{ image.caption }}</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        {# Contrôles #}
+                        {% if ad.images|length > 1 %}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#adCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon rounded-circle p-2 bg-dark bg-opacity-25" aria-hidden="true"></span>
+                                <span class="visually-hidden">Précédent</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#adCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon rounded-circle p-2 bg-dark bg-opacity-25" aria-hidden="true"></span>
+                                <span class="visually-hidden">Suivant</span>
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            {# Présentation du bien #}
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+                <h3 class="fw-bold mb-4 pb-2 border-bottom">À propos de ce logement</h3>
+                <div class="ad-content text-black lh-lg fs-6">
+                    {{ ad.content | raw | nl2br }}
+                </div>
+            </div>
+
+        </div>
+        {# Colonne droite : Widget Réservation et Profil Hôte #}
+        <div class="col-lg-4">
+            <div class="position-sticky" style="top: 2rem;">
+                
+                {# Card Réservation #}
+                <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-baseline mb-3">
+                        <div>
+                            <span class="fs-2 fw-bold text-dark">{{ ad.price }} €</span>
+                            <span class="text-muted">/ nuit</span>
+                        </div>
+                        <span class="text-muted small">Disponibilité immédiate</span>
+                    </div>
+
+                    <a href="#" class="btn btn-primary btn-lg rounded-pill w-100 fw-semibold py-3 shadow-sm mb-3">
+                        Réserver ce logement
+                    </a>
+                    <p class="text-muted text-center small mb-0">Aucun montant ne vous sera débité pour l'instant</p>
+                </div>
+
+                {# Card Auteur / Hôte #}
+                <div class="card border-0 shadow-sm rounded-4 p-4">
+                    <h5 class="fw-bold text-muted small text-uppercase mb-3">Votre hôte</h5>
+                    
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <a href="#">
+                          
+                                <img src="https://i.pinimg.com/564x/9a/00/5b/9a005b834414f121dcd940f5216a6546.jpg" alt="#" class="rounded-circle object-fit-cover shadow-sm" width="64" height="64">
+                        
+                        </a>
+                        <div>
+                            <h5 class="mb-1">
+                                <a href="#" class="text-dark text-decoration-none fw-bold">
+                                    Bruce Wayne
+                                </a>
+                            </h5>
+                            <span class="badge bg-light text-dark border rounded-pill px-2 py-1 small">
+                                3 annonces
+                            </span>
+                        </div>
+                    </div>
+
+            
+                    <div class="text-muted small lh-base border-top pt-3">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi rem quam quas repellat facilis similique necessitatibus harum praesentium rerum? Necessitatibus laborum reprehenderit soluta recusandae enim nihil in at doloremque dolor.
+                    </div>
+                 
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
