@@ -1,0 +1,80 @@
+<footer class="bg-light border-top mt-auto pt-5 pb-4 text-black">
+    <div class="container">
+        <div class="row g-4 mb-5">
+            
+            {# Colonne 1 : À propos / Identité #}
+            <div class="col-12 col-md-4">
+                <a class="text-decoration-none fw-bold fs-4 text-primary d-inline-flex align-items-center gap-2 mb-3" href="{{ path('homepage') }}">
+                    ImmoLoc
+                </a>
+                <p class="small text-muted lh-base mb-3">
+                    La plateforme collaborative qui connecte propriétaires et voyageurs. Réservez en toute confiance des logements uniques pour des séjours inoubliables.
+                </p>
+                {# npm install bootstrap-icons --save-dev #}
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-sm btn-white border rounded-circle p-2 text-black shadow-sm" aria-label="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-white border rounded-circle p-2 text-black shadow-sm" aria-label="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-white border rounded-circle p-2 text-black shadow-sm" aria-label="Twitter">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-white border rounded-circle p-2 text-black shadow-sm" aria-label="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            {# Colonne 2 : Découverte / Liens rapides #}
+            <div class="col-6 col-md-2">
+                <h6 class="fw-bold text-dark text-uppercase small mb-3">Explorer</h6>
+                <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                    <li><a href="#" class="text-muted text-decoration-none hover-primary">Toutes les annonces</a></li>
+                    <li><a href="{{ path('homepage') }}" class="text-muted text-decoration-none hover-primary">Logements stars</a></li>
+                    <li><a href="#" class="text-muted text-decoration-none hover-primary">Destinations du moment</a></li>
+                    <li><a href="#" class="text-muted text-decoration-none hover-primary">Guide des prix</a></li>
+                </ul>
+            </div>
+
+            {# Colonne 3 : Espace Hôtes #}
+            <div class="col-6 col-md-2">
+                <h6 class="fw-bold text-dark text-uppercase small mb-3">Propriétaires</h6>
+                <ul class="list-unstyled small mb-0 d-flex flex-column gap-2">
+                    <li><a href="#" class="text-muted text-decoration-none hover-primary">Déposer une annonce</a></li>
+                    <li><a href="#" class="text-muted text-decoration-none hover-primary">Conseils pour louer</a></li>
+                    <li><a href="#" class="text-muted text-decoration-none hover-primary">Garantie & assurance</a></li>
+                    <li><a href="#" class="text-muted text-decoration-none hover-primary">Règlement intérieur</a></li>
+                </ul>
+            </div>
+
+            {# Colonne 4 : Newsletter / Newsletter rapide #}
+            <div class="col-12 col-md-4">
+                <h6 class="fw-bold text-dark text-uppercase small mb-3">Bons plans & nouveautés</h6>
+                <p class="small text-muted mb-3">Recevez chaque semaine nos meilleures offres et sélections de logements insolites.</p>
+                <form action="#" method="post" class="d-flex gap-2">
+                    <input type="email" class="form-control form-control-sm rounded-pill px-3" placeholder="Votre adresse email" aria-label="Email pour la newsletter">
+                    <button class="btn btn-primary btn-sm rounded-pill px-3 fw-medium text-nowrap shadow-sm" type="button">
+                        S'inscrire
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        {# Bas de page : Droits & Légal #}
+        <div class="border-top pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-muted">
+            <p class="mb-0">
+                &copy; {{ "now"|date("Y") }} <strong>ImmoLoc</strong>. Tous droits réservés.
+            </p>
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item"><a href="#" class="text-muted text-decoration-none hover-primary">Conditions générales</a></li>
+                <li class="list-inline-item">·</li>
+                <li class="list-inline-item"><a href="#" class="text-muted text-decoration-none hover-primary">Politique de confidentialité</a></li>
+                <li class="list-inline-item">·</li>
+                <li class="list-inline-item"><a href="#" class="text-muted text-decoration-none hover-primary">Mentions légales</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>

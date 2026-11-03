@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImmoLoc · Trouvez votre hébergement idéal{% endblock %}
+
+{% block body %}
+{# 1. Bannière Hero d'accueil #}
+<div class="bg-light py-5 mb-5 border-bottom">
+    <div class="container py-4">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-8">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill fw-semibold mb-3">
+                    La référence des locations saisonnières
+                </span>
+                <h1 class="display-4 fw-bold text-dark mb-3">
+                    Bienvenue sur <span class="text-primary">ImmoLoc</span>
+                </h1>
+                <p class="lead text-muted mb-4">
+                    Nous mettons en relation voyageurs et propriétaires passionnés. Trouvez le lieu idéal pour vos prochaines vacances ou valorisez votre bien en toute sérénité.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="{{ path('ads_index') }}" class="btn btn-primary btn-lg rounded-pill px-4 py-3 fw-semibold shadow-sm">
+                        Explorer les annonces
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary btn-lg rounded-pill px-4 py-3 fw-semibold">
+                        Devenir hôte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-5">
+    
+    {# 2. Section : Biens Immobiliers Stars #}
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Nos hébergements stars</h2>
+            <p class="text-muted mb-0">Les logements les plus plébiscités par notre communauté</p>
+        </div>
+        <a href="{{ path('ads_index') }}" class="text-primary text-decoration-none fw-semibold small">
+            Tout voir →
+        </a>
+    </div>
+
+    <div class="row g-4 mb-5">
+        {# Carte 1 #}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden ad-card">
+                <div class="position-relative overflow-hidden">
+                    <img src="https://picsum.photos/id/2/900/600" alt="Superbe appartement" class="card-img-top ad-img" style="height: 220px; object-fit: cover;">
+                    <div class="position-absolute bottom-0 start-0 m-3 px-3 py-1 bg-dark bg-opacity-75 text-white rounded-pill backdrop-blur">
+                        <span class="fw-bold fs-5">49 €</span> <small class="text-white-50">/ nuit</small>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3 px-2 py-1 bg-white shadow-sm rounded-pill small fw-medium text-black">
+                        🛏 3 chambres
+                    </div>
+                </div>
+                <div class="card-body d-flex flex-column p-4">
+                    <h5 class="card-title fw-bold mb-2">
+                        <a href="#" class="text-dark text-decoration-none">Super appartement lumineux</a>
+                    </h5>
+                    <p class="card-text text-muted small flex-grow-1 mb-4" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        Situé en plein centre-ville, découvrez ce havre de paix refait à neuf, idéal pour un séjour reposant.
+                    </p>
+                    <div class="pt-2 border-top">
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-pill w-100 py-2 fw-medium">
+                            En savoir plus
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Carte 2 #}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden ad-card">
+                <div class="position-relative overflow-hidden">
+                    <img src="https://picsum.photos/id/3/900/600" alt="Superbe villa" class="card-img-top ad-img" style="height: 220px; object-fit: cover;">
+                    <div class="position-absolute bottom-0 start-0 m-3 px-3 py-1 bg-dark bg-opacity-75 text-white rounded-pill backdrop-blur">
+                        <span class="fw-bold fs-5">65 €</span> <small class="text-white-50">/ nuit</small>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3 px-2 py-1 bg-white shadow-sm rounded-pill small fw-medium text-black">
+                        🛏 2 chambres
+                    </div>
+                </div>
+                <div class="card-body d-flex flex-column p-4">
+                    <h5 class="card-title fw-bold mb-2">
+                        <a href="#" class="text-dark text-decoration-none">Maison cosy avec terrasse</a>
+                    </h5>
+                    <p class="card-text text-muted small flex-grow-1 mb-4" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        Profitez du calme absolu avec un beau jardin arboré et tout le confort moderne nécessaire.
+                    </p>
+                    <div class="pt-2 border-top">
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-pill w-100 py-2 fw-medium">
+                            En savoir plus
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Carte 3 #}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden ad-card">
+                <div class="position-relative overflow-hidden">
+                    <img src="https://picsum.photos/id/4/900/600" alt="Loft panoramique" class="card-img-top ad-img" style="height: 220px; object-fit: cover;">
+                    <div class="position-absolute bottom-0 start-0 m-3 px-3 py-1 bg-dark bg-opacity-75 text-white rounded-pill backdrop-blur">
+                        <span class="fw-bold fs-5">85 €</span> <small class="text-white-50">/ nuit</small>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-3 px-2 py-1 bg-white shadow-sm rounded-pill small fw-medium text-black">
+                        🛏 4 chambres
+                    </div>
+                </div>
+                <div class="card-body d-flex flex-column p-4">
+                    <h5 class="card-title fw-bold mb-2">
+                        <a href="#" class="text-dark text-decoration-none">Loft design vue imprenable</a>
+                    </h5>
+                    <p class="card-text text-muted small flex-grow-1 mb-4" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                        Spacieux, baigné de soleil, doté d'équipements haut de gamme pour les voyageurs exigeants.
+                    </p>
+                    <div class="pt-2 border-top">
+                        <a href="#" class="btn btn-outline-primary btn-sm rounded-pill w-100 py-2 fw-medium">
+                            En savoir plus
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# 3. Section : Propriétaires Stars #}
+    <div class="mb-4">
+        <h2 class="fw-bold mb-1">Nos hôtes coup de cœur</h2>
+        <p class="text-muted">Des hôtes reconnus pour leur accueil chaleureux et leur réactivité</p>
+    </div>
+
+    <div class="row g-4">
+        {# Propriétaire 1 #}
+        <div class="col-12 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <img src="https://picsum.photos/id/64/100/100" alt="Avatar de Bruce Wayne" class="rounded-circle shadow-sm object-fit-cover" width="60" height="60">
+                    <div>
+                        <h5 class="fw-bold mb-0">Bruce Wayne</h5>
+                        <span class="badge bg-light text-black border rounded-pill px-2 py-1 small">
+                            ⭐ Superhôte · 12 annonces
+                        </span>
+                    </div>
+                </div>
+                <p class="text-muted small mb-4 flex-grow-1">
+                    Passionné par l'accueil et le confort de mes invités. Je veille personnellement à ce que chaque séjour soit mémorable.
+                </p>
+                <div class="d-flex justify-content-end border-top pt-3">
+                    <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">
+                        Voir le profil
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {# Propriétaire 2 #}
+        <div class="col-12 col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 p-4 h-100">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <img src="https://picsum.photos/id/65/100/100" alt="Avatar de Selina Kyle" class="rounded-circle shadow-sm object-fit-cover" width="60" height="60">
+                    <div>
+                        <h5 class="fw-bold mb-0">Selina Kyle</h5>
+                        <span class="badge bg-light text-black border rounded-pill px-2 py-1 small">
+                            ⭐ Superhôte · 8 annonces
+                        </span>
+                    </div>
+                </div>
+                <p class="text-muted small mb-4 flex-grow-1">
+                    Toujours à disposition pour partager les meilleures adresses locales et garantir un séjour en toute tranquillité.
+                </p>
+                <div class="d-flex justify-content-end border-top pt-3">
+                    <a href="#" class="btn btn-outline-dark btn-sm rounded-pill px-3">
+                        Voir le profil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
