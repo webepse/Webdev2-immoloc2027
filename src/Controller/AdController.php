@@ -30,6 +30,24 @@ final class AdController extends AbstractController
     //     ]);
     // }
 
+  
+    #[Route("/ads/new", name: "ads_create")]
+    public function create(): Response
+    {
+        $ad = new Ad();
+        $form = $this->createFormBuilder($ad)
+                    ->add("title")
+                    ->add("introduction")
+                    ->add("content")
+                    ->add('price')
+                    ->add("rooms")
+                    ->getForm();
+
+        return $this->render("ad/new.html.twig",[
+            'myForm' => $form->createView()
+        ]);
+    }
+
 
     #[Route('/ads/{slug}', name: "ads_show")]
     public function show(
@@ -39,4 +57,7 @@ final class AdController extends AbstractController
             'ad' => $ad
         ]);
     }
+    
+ 
+    
 }

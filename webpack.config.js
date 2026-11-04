@@ -79,3 +79,4 @@ Encore
 ;
 
 export default await Encore.getWebpackConfig();
+

@@ -61,7 +61,7 @@ pour créer la bdd
 ```composer install``` ou ```composer i```
 
 ### installation des dépendances de npm (package.json)
-````npm install``` ou ```npm i```
+```npm install``` ou ```npm i```
 
 ### rentrer dans le dossier via votre IDE
 
