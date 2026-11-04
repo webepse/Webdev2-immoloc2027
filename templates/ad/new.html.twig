@@ -1,41 +1,54 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
-{% block title %}Création d'une annonce{% endblock %}
+{% block title %}Créer une nouvelle annonce{% endblock %}
 
-{% form_theme myForm _self %}
+{# {% form_theme myForm 'bootstrap_5_layout.html.twig' 'ad/_collection.html.twig' %} #}
 
 {% block body %}
-    <div class="container">
-        <h1>Création d'une annonce</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
 
-        {{ form_start(myForm) }}
-
-            {{ form_widget(myForm) }}
-
-           <button type="submit" class="btn btn-primary">Création d'une annonce</button>
-
-        {{ form_end(myForm) }}
-
-    </div>
-
-{% endblock %}
-
-{% block form_row %}
-{# 
-    {{ dump() }}
- #}
-    <div class="form-group my-3">
-        <div class="row">
-            <div class="col-6">{{ form_label(form) }}</div>
-            <div class="col-6">
-                {# {{ form_widget(form, {'attr':{'class':'form-control'}}) }} #}
-                {{ form_widget(form) }} 
+            {# Lien de retour #}
+            <div class="mb-4">
+                <a href="{{ path('ads_index') }}" class="text-dark text-decoration-none small fw-semibold">
+                    ← Retour aux annonces
+                </a>
             </div>
+
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                {# En-tête #}
+                <div class="pb-3 mb-4 border-bottom">
+                    <span class="badge bg-light text-dark border rounded-pill px-3 py-1 small fw-semibold mb-2">
+                        Espace Propriétaire
+                    </span>
+                    <h1 class="h3 fw-bold text-dark mb-1">Publier une annonce</h1>
+                    <p class="text-dark small mb-0">Remplissez les détails ci-dessous pour rendre votre bien visible auprès des voyageurs.</p>
+                </div>
+
+                {{ form_start(myForm, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                    {# Rendu des champs via vos thèmes de formulaire #}
+                    <div class="d-flex flex-column gap-3 mb-4">
+                        {{ form_widget(myForm) }}
+                    </div>
+
+                    {# Actions de soumission #}
+                    <div class="d-flex flex-column flex-sm-row justify-content-end align-items-center gap-2 pt-4 border-top">
+                        <a href="{{ path('ads_index') }}" class="btn btn-outline-dark rounded-pill px-4 py-2 w-100 w-sm-auto order-2 order-sm-1">
+                            Annuler
+                        </a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold shadow-sm w-100 w-sm-auto order-1 order-sm-2">
+                            Publier l'annonce
+                        </button>
+                    </div>
+
+                {{ form_end(myForm) }}
+
+            </div>
+
         </div>
     </div>
-
-{% endblock %}
-
-{% block text_widget %}
-    <input type="text" name="{{full_name}}" id="{{id}}" class="form-control">
+</div>
 {% endblock %}
