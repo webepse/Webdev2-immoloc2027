@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Form\AnnonceType;
 use App\Repository\AdRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,16 +34,15 @@ final class AdController extends AbstractController
 
   
     #[Route("/ads/new", name: "ads_create")]
-    public function create(): Response
+    public function create(EntityManagerInterface $manager): Response
     {
         $ad = new Ad();
-        $form = $this->createFormBuilder($ad)
-                    ->add("title")
-                    ->add("introduction")
-                    ->add("content")
-                    ->add('price')
-                    ->add("rooms")
-                    ->getForm();
+        // php bin/console make:form AnnonceType => association avec Ad
+        $form = $this->createForm(AnnonceType::class,$ad);
+
+
+            // $manager->persist($ad);
+            // $manager->flush();
 
         return $this->render("ad/new.html.twig",[
             'myForm' => $form->createView()
