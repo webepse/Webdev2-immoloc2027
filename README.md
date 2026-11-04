@@ -20,6 +20,10 @@
 
 ```npm install bootstrap@5.3.8```
 
+installation de bootstrap icons
+
+```npm install bootstrap-icons --save-dev```
+
 ## créer la bdd
 
 modifier le .env
@@ -43,3 +47,47 @@ pour créer la bdd
 ```composer require fakerphp/faker```
 
 ```composer require cocur/slugify```
+
+# Procédure d'installation via GitHub d'un projet déjà créé
+
+
+### clone le repository
+```git clone https://github.com/webepse/Webdev2-immoloc2027.git```
+
+### rentrer dans le dossier
+```cd Webdev2-immoloc2027```
+
+### installation des dépendances de composer (composer.json)
+```composer install``` ou ```composer i```
+
+### installation des dépendances de npm (package.json)
+````npm install``` ou ```npm i```
+
+### rentrer dans le dossier via votre IDE
+
+exemple avec VSCODE
+```code .```
+
+### création de la base de données (voir .env)
+
+Création de la bdd
+
+```php bin/console doctrine:database:create```
+
+Envoyer les tables
+
+```php bin/console doctrine:migrations:migrate```
+
+Remplir les données
+
+```php bin/console doctrine:fixtures:load```
+
+### démarrer les serveurs
+
+Serveur php
+
+```symfony server:start```
+
+Serveur JS
+
+```npm run watch```
