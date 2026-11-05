@@ -39,35 +39,18 @@ final class AdController extends AbstractController
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
         $ad = new Ad();
-
-        // $image1 = new Image();
-        // $image1->setUrl("https://www.epse.be")
-        //     ->setCaption("Titre de l'annonce");
-
-        // $image2= new Image();
-        // $image2->setUrl("https://www.epse.be")
-        //     ->setCaption("Titre de l'annonce");
-
-        //     $ad->addImage($image1);
-        //     $ad->addImage($image2);
-
-        //$arrayForm = $request->request->all();
-
         // php bin/console make:form AnnonceType => association avec Ad
         $form = $this->createForm(AnnonceType::class,$ad);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            //dump($arrayForm);
-            //dump($ad);
+        
             // gestion des images
             foreach( $ad->getImages() as $image ){
                 $image->setAd($ad);
                 $manager->persist($image);
             }
-
-
             $manager->persist($ad);
             $manager->flush();
 
@@ -75,7 +58,6 @@ final class AdController extends AbstractController
                 'success',
                 "L'annonce <strong>".$ad->getTitle()."</strong> a bien été enregistrée"
             );
-
             return $this->redirectToRoute('ads_show',[
                 "slug" => $ad->getSlug()
             ]);
