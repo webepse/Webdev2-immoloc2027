@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'annonce : {{ ad.title }}{% endblock %}
+
+{# {% form_theme myForm 'bootstrap_5_layout.html.twig' 'ad/_collection.html.twig' %} #}
+{% form_theme myForm 'ad/_collection.html.twig' %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+
+            {# Lien de retour vers la vue détaillée de l'annonce #}
+            <div class="mb-4">
+                <a href="{{ path('ads_show', {'slug': ad.slug}) }}" class="text-dark text-decoration-none small fw-semibold">
+                    ← Retour à l'annonce
+                </a>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+
+                {# En-tête #}
+                <div class="pb-3 mb-4 border-bottom">
+                    <span class="badge bg-light text-dark border rounded-pill px-3 py-1 small fw-semibold mb-2">
+                        Gestion de bien
+                    </span>
+                    <h1 class="h3 fw-bold text-dark mb-1">
+                        Modifier l'annonce : <span class="fw-normal">{{ ad.title }}</span>
+                    </h1>
+                    <p class="text-dark small mb-0">Mettez à jour les informations, tarifs ou photos associées à ce logement.</p>
+                </div>
+
+                {{ form_start(myForm, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                    {# Champs générés avec les thèmes combinés #}
+                    <div class="d-flex flex-column gap-3 mb-4">
+                        {{ form_widget(myForm) }}
+                    </div>
+
+                    {# Actions de soumission #}
+                    <div class="d-flex flex-column flex-sm-row justify-content-end align-items-center gap-2 pt-4 border-top">
+                        <a href="{{ path('ads_show', {'slug': ad.slug}) }}" class="btn btn-outline-dark rounded-pill px-4 py-2 w-100 w-sm-auto order-2 order-sm-1">
+                            Annuler
+                        </a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold shadow-sm w-100 w-sm-auto order-1 order-sm-2">
+                            Enregistrer les modifications
+                        </button>
+                    </div>
+
+                {{ form_end(myForm) }}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {# {{ parent() }} #}
+    {{ encore_entry_script_tags('annonce') }}
+{% endblock %}

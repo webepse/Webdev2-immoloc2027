@@ -68,6 +68,41 @@ final class AdController extends AbstractController
         ]);
     }
 
+    #[Route("/ads/{slug}/edit", name:"ads_edit")]
+    public function edit(
+          #[MapEntity(mapping: ['slug' => 'slug'])] Ad $ad,
+          Request $request, EntityManagerInterface $manager  
+    ): Response
+    {
+        $form = $this->createForm(AnnonceType::class,$ad);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+             // gestion des images
+            foreach( $ad->getImages() as $image ){
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                "warning",
+                "L'annonce <strong>".$ad->getTitle()."</strong> a bien été modifiée"
+            );
+
+            return $this->redirectToRoute("ads_show",[
+                'slug' => $ad->getSlug()
+            ]);
+        }
+
+        return $this->render("ad/edit.html.twig",[
+            "ad" => $ad,
+            "myForm" => $form->createView()
+        ]);
+    }
+
 
     #[Route('/ads/{slug}', name: "ads_show")]
     public function show(
