@@ -1,0 +1,59 @@
+{# 1. Bloc conteneur principal de la collection #}
+{% block _annonce_images_widget %}
+    <div class="mb-3">
+        <label class="form-label fw-bold text-dark mb-1">Galerie d'images secondaires</label>
+        <p class="text-dark small mb-3">Ajoutez des photographies pour valoriser les différentes pièces de votre hébergement.</p>
+        
+        {# Conteneur recevant les lignes générées #}
+        <div id="annonce_images_list" class="d-flex flex-column gap-2 mb-3">
+            {{ form_widget(form) }}
+        </div>
+
+        {# Compteur d'éléments pour le JavaScript #}
+        <input type="hidden" id="widgets-counter" value="{{ form|length }}">
+
+        <div>
+            <button type="button" id="add-image" class="btn btn-outline-primary btn-sm rounded-pill px-3 py-2 fw-semibold shadow-sm">
+                Ajouter une image
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{# 2. Rendu de chaque ligne d'entrée #}
+{% block _annonce_images_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{# 3. Structure d'un item individuel (URL + Légende + Action) #}
+{% block _annonce_images_entry_widget %}
+    <div class="bg-light border rounded-3 p-3 position-relative" id="block_{{ id }}">
+        <div class="row g-2 align-items-start">
+            
+            {# Champ URL #}
+            <div class="col-12 col-md-5">
+                <label class="form-label text-dark small fw-semibold mb-1" for="{{ form.url.vars.id }}">Lien de l'image (URL)</label>
+                {{ form_widget(form.url, {'attr': {'class': 'form-control form-control-sm rounded-2', 'placeholder': 'https://exemple.com/photo.jpg'}}) }}
+                {{ form_errors(form.url) }}
+            </div>
+
+            {# Champ Légende / Titre #}
+            <div class="col-12 col-md-5">
+                <label class="form-label text-dark small fw-semibold mb-1" for="{{ form.caption.vars.id }}">Titre ou description</label>
+                {{ form_widget(form.caption, {'attr': {'class': 'form-control form-control-sm rounded-2', 'placeholder': 'Ex: Chambre principale, Vue sur mer'}}) }}
+                {{ form_errors(form.caption) }}
+            </div>
+
+            {# Bouton de suppression #}
+            <div class="col-12 col-md-2 d-flex flex-column justify-content-end pt-md-4">
+                <button type="button" 
+                        class="btn btn-outline-danger btn-sm rounded-pill w-100 fw-semibold" 
+                        data-action="delete" 
+                        data-target="#block_{{ id }}">
+                    Supprimer
+                </button>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

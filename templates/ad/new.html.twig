@@ -2,7 +2,7 @@
 
 {% block title %}Créer une nouvelle annonce{% endblock %}
 
-{# {% form_theme myForm 'bootstrap_5_layout.html.twig' 'ad/_collection.html.twig' %} #}
+{% form_theme myForm 'bootstrap_5_layout.html.twig' 'ad/_collection.html.twig' %}
 
 {% block body %}
 <div class="container py-5">
@@ -51,4 +51,9 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('annonce') }}
 {% endblock %}

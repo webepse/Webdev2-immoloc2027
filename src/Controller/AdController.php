@@ -40,16 +40,16 @@ final class AdController extends AbstractController
     {
         $ad = new Ad();
 
-        $image1 = new Image();
-        $image1->setUrl("https://www.epse.be")
-            ->setCaption("Titre de l'annonce");
+        // $image1 = new Image();
+        // $image1->setUrl("https://www.epse.be")
+        //     ->setCaption("Titre de l'annonce");
 
-        $image2= new Image();
-        $image2->setUrl("https://www.epse.be")
-            ->setCaption("Titre de l'annonce");
+        // $image2= new Image();
+        // $image2->setUrl("https://www.epse.be")
+        //     ->setCaption("Titre de l'annonce");
 
-            $ad->addImage($image1);
-            $ad->addImage($image2);
+        //     $ad->addImage($image1);
+        //     $ad->addImage($image2);
 
         //$arrayForm = $request->request->all();
 
@@ -61,6 +61,12 @@ final class AdController extends AbstractController
         {
             //dump($arrayForm);
             //dump($ad);
+            // gestion des images
+            foreach( $ad->getImages() as $image ){
+                $image->setAd($ad);
+                $manager->persist($image);
+            }
+
 
             $manager->persist($ad);
             $manager->flush();
