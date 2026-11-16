@@ -10,7 +10,8 @@
         "bootstrap-icons": "^1.13.2",
         "core-js": "^3.49.0",
         "webpack": "^5.82",
-        "webpack-cli": "^7.0.0"
+        "webpack-cli": "^7.0.0",
+        "webpack-dev-server": "^6.1.0"
     },
     "license": "UNLICENSED",
     "private": true,
