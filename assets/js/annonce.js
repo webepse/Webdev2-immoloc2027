@@ -13,8 +13,10 @@ addImage.addEventListener('click',()=>{
 })
 const updateCounter = () => {
     const count = document.querySelectorAll('#annonce_images div.form-group').length
+    console.log(count)
     document.querySelector('#widgets-counter').value = count
 }
+
 const handleDeleteButtons = () => {
     var deletes = document.querySelectorAll("button[data-action='delete']")
     deletes.forEach(button => {
