@@ -26,7 +26,6 @@ class AnnonceType extends AbstractType
         ],$options);
     }
 
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
