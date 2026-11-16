@@ -91,3 +91,7 @@ Serveur php
 Serveur JS
 
 ```npm run watch```
+
+# installer rate-limiter:
+
+```composer require symfony/rate-limiter```
