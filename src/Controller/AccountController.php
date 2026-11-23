@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\PasswordUpdate;
 use App\Entity\User;
 use App\Form\AccountType;
+use App\Form\PasswordUpdateType;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -104,6 +107,41 @@ final class AccountController extends AbstractController
 
     }
 
+    #[Route("/account/password-update", name:"account_password")]
+    public function updatePassword(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher): Response
+    {
+        $passwordUpdate = new PasswordUpdate();
+        // exemple de code : Gx9#mQ3$vL5!p27@
+        // besoin du User
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+        $form = $this->createForm(PasswordUpdateType::class,$passwordUpdate);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            if(!password_verify($passwordUpdate->getOldPassword(),$user->getPassword())){
+                // gérer l'erreur
+                $form->get("oldPassword")->addError(new FormError("Le mot de passe que vous avez tapé n'est pas votre mot de passe actuel"));
+            }else{
+                $newPassword = $passwordUpdate->getNewPassword();
+                $hash = $hasher->hashPassword($user,$newPassword);
+                $user->setPassword($newPassword);
+                $manager->persist($user);
+                $manager->flush();
+                $this->addFlash(
+                    "success",
+                    "Votre mot de passe a bien été modifié"
+                );
+                return $this->redirectToRoute("homepage");
+            }
+        }
+
+        return $this->render("account/password.html.twig",[
+            "myForm" => $form->createView()
+        ]);
+    }
 
 
 }
