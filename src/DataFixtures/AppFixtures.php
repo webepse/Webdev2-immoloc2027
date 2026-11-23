@@ -21,6 +21,18 @@ class AppFixtures extends Fixture
         $faker = Factory::create();
         $slugify = new Slugify();
 
+        // gestion d'un admin 
+        $admin = new User();
+        $admin->setFirstName("Admin")
+            ->setLastName("Admin")
+            ->setEmail("admin@myepse.be")
+            ->setPassword($this->passwordHasher->hashPassword($admin,"password"))
+            ->setIntroduction($faker->sentence())
+            ->setDescription("<p>".join("</p><p>",$faker->paragraphs(3))."</p>")
+            ->setRoles(["ROLE_ADMIN"]);
+        $manager->persist($admin);
+
+
         // gestion des users
         $users = []; // initialisation d'un tableau pour récup des user pour les Ad
         $genres = ['male','femelle'];

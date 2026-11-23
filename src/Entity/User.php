@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Mot de passe brut temporaire (non stocké en base)
      */
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(groups: ['registration'])]
     #[Assert\Length(
         min: 8,
         max: 4096, // Sécurité contre les attaques DoS sur l'algorithme de hashage
@@ -107,6 +107,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->firstName." ".$this->lastName." ".uniqid());
         }
+    }
+
+    /**
+     * Permet de récup le nom complet de l'utilisateur
+     *
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return $this->firstName." ".$this->lastName;
     }
 
     public function getPlainPassword(): ?string

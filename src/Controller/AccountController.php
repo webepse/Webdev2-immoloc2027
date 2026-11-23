@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AccountType;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,5 +80,30 @@ final class AccountController extends AbstractController
             "myForm" => $form->createView()
         ]);
     }
+
+    #[Route("/account/profile", name:"account_profile")]
+    public function profile(Request $request, EntityManagerInterface $manager): Response
+    {
+        $user = $this->getUser(); // récup l'utilisateur connecté
+        $form = $this->createForm(AccountType::class,$user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($user);
+            $manager->flush();
+            $this->addFlash(
+                "success",
+                "Les données ont été enregistrées avec succès"
+            );
+        }
+
+
+        return $this->render("account/profile.html.twig",[
+            "myForm" => $form->createView()
+        ]);
+
+    }
+
+
 
 }

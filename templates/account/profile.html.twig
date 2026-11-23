@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            
+            {# Bouton de retour rapide #}
+            <div class="mb-4">
+                <a href="{#{{ path('account_index') }}#}" class="text-secondary text-decoration-none small fw-medium">
+                    ← Retour à mon profil
+                </a>
+            </div>
+
+            <div class="card border-0 shadow-sm rounded-4 p-4 p-md-5">
+                
+                {# En-tête de la carte avec aperçu de l'avatar actuel #}
+                <div class="d-flex align-items-center gap-3 pb-4 mb-4 border-bottom">
+                    {% if app.user.picture %}
+                        <img src="/uploads/{{ app.user.picture }}" 
+                             alt="{{ app.user.fullName }}" 
+                             class="rounded-circle object-fit-cover shadow-sm border" 
+                             width="64" 
+                             height="64">
+                    {% else %}
+                        <span class="rounded-circle bg-primary bg-opacity-10 text-primary d-inline-flex align-items-center justify-content-center fw-bold fs-4" style="width: 64px; height: 64px;">
+                            {{ app.user.firstName ? app.user.firstName|first|upper : 'U' }}
+                        </span>
+                    {% endif %}
+                    <div>
+                        <h1 class="h4 fw-bold text-dark mb-1">Modifier mon profil</h1>
+                        <p class="text-muted small mb-0">Mettez à jour vos coordonnées et les informations visibles par les autres membres.</p>
+                    </div>
+                </div>
+
+                {{ form_start(myForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                    
+                    {# Rendu structuré des champs #}
+                    <div class="d-flex flex-column gap-3 mb-4">
+                        {{ form_widget(myForm) }}
+                    </div>
+
+                    {# Actions #}
+                    <div class="d-flex flex-column flex-sm-row justify-content-end align-items-center gap-2 pt-3 border-top">
+                        <a href="{#{{ path('account_index') }}#}" class="btn btn-outline-secondary rounded-pill px-4 py-2 w-100 w-sm-auto order-2 order-sm-1">
+                            Annuler
+                        </a>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 fw-semibold shadow-sm w-100 w-sm-auto order-1 order-sm-2">
+                            Enregistrer les modifications
+                        </button>
+                    </div>
+
+                {{ form_end(myForm) }}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
