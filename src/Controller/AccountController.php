@@ -127,7 +127,7 @@ final class AccountController extends AbstractController
             }else{
                 $newPassword = $passwordUpdate->getNewPassword();
                 $hash = $hasher->hashPassword($user,$newPassword);
-                $user->setPassword($newPassword);
+                $user->setPassword($hash);
                 $manager->persist($user);
                 $manager->flush();
                 $this->addFlash(
